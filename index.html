@@ -105,6 +105,7 @@
         document.getElementById('hackForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
+
             const responseDiv = document.getElementById('response');
             const password = document.getElementById('password').value;
             
@@ -122,6 +123,10 @@
                 if(data.result == "success"){
                     responseDiv.textContent = "success";
                     responseDiv.className = response.ok ? 'success' : 'error';
+                    responseDiv.style.display = 'block';
+                }else if(data.result == "pending"){
+                    responseDiv.textContent = '현재 발사중. 대기필요';
+                    responseDiv.className = 'error';
                     responseDiv.style.display = 'block';
                 }else{
                     responseDiv.textContent = 'fail';
