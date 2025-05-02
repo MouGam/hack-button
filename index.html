@@ -56,6 +56,13 @@
             transform: scale(0.95);
         }
 
+        button[type="submit"]:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
         @media (max-width: 768px) {
             button[type="submit"] {
                 width: 150px;
@@ -105,8 +112,9 @@
         document.getElementById('hackForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-
             const responseDiv = document.getElementById('response');
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
             const password = document.getElementById('password').value;
             
             try {
@@ -137,6 +145,8 @@
                 responseDiv.textContent = '오류가 발생했습니다: ' + error.message;
                 responseDiv.className = 'error';
                 responseDiv.style.display = 'block';
+            } finally {
+                submitButton.disabled = false;
             }
 
             // 폼 초기화
